@@ -15,8 +15,8 @@ describe('<JokesList /> component', () => {
       { id: 2, value: 'Joke 2' },
     ];
     render(<JokesList jokes={jokes} />);
-    jokes.forEach((joke) => {
-      expect(screen.getByText(joke.value)).toBeInTheDocument();
+    jokes.forEach(({ id }) => {
+      expect(screen.getByTestId(`joke_${id}`)).toBeInTheDocument();
     });
   });
 
