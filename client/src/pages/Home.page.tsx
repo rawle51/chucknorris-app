@@ -37,19 +37,37 @@ export const HomePage = () => {
       const savedJokes = getSavedFavorites();
       const wasAdded = savedJokes.find(({ id }) => id === joke.id);
 
-      if (savedJokes.length < MAX_FAVORITE_JOKES && !wasAdded) {
-        localStorage.setItem(
-          FAVORITES_STORAGE_KEY,
-          JSON.stringify([joke, ...savedJokes]),
-        );
-      } else {
+      if (savedJokes.length >= MAX_FAVORITE_JOKES) {
         toast({
           title: 'Maximum favorite jokes limit exceeded',
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
+        return;
       }
+
+      if (wasAdded) {
+        toast({
+          title: 'Joke was already saved before',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      localStorage.setItem(
+        FAVORITES_STORAGE_KEY,
+        JSON.stringify([joke, ...savedJokes]),
+      );
+
+      toast({
+        title: 'Joke was successfully saved',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
     },
     [toast],
   );
@@ -64,7 +82,7 @@ export const HomePage = () => {
           <JokesList
             jokes={jokes}
             onJokeClick={handleJokeClick}
-            descriptionText="Click to add to favorites"
+            descriptionText="Click joke to add to favorites"
           />
         </CardBody>
       </Card>

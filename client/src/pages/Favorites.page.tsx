@@ -1,5 +1,5 @@
-import { Card, CardBody, Box } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Card, CardBody, Box, useToast } from '@chakra-ui/react';
+import { useCallback, useState } from 'react';
 
 import { JokesList } from '../components/JokesList/JokesList';
 import { Joke } from '../services/sdk.service';
@@ -10,18 +10,32 @@ import {
 
 export const FavoritesPage = () => {
   const jokes = getSavedFavorites();
+  const toast = useToast();
 
   const [state, setState] = useState<Joke[]>(jokes);
 
-  const handleJokeClick = (joke: Joke) => {
-    const savedJokes = getSavedFavorites();
+  const handleJokeClick = useCallback(
+    (joke: Joke) => {
+      const savedJokes = getSavedFavorites();
 
-    const filteredJokes = savedJokes.filter(({ id }) => id !== joke.id);
+      const filteredJokes = savedJokes.filter(({ id }) => id !== joke.id);
 
-    setState(filteredJokes);
+      setState(filteredJokes);
 
-    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(filteredJokes));
-  };
+      localStorage.setItem(
+        FAVORITES_STORAGE_KEY,
+        JSON.stringify(filteredJokes),
+      );
+
+      toast({
+        title: 'Joke was successfully deleted',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    [toast],
+  );
 
   return (
     <Box width="100%">
@@ -30,7 +44,7 @@ export const FavoritesPage = () => {
           <JokesList
             jokes={state}
             onJokeClick={handleJokeClick}
-            descriptionText="Click to remove from favorites"
+            descriptionText="Click joke to remove from favorites"
           />
         </CardBody>
       </Card>

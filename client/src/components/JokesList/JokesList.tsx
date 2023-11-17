@@ -23,7 +23,9 @@ export const JokesList = ({
 
   return (
     <>
-      {descriptionText}
+      <Text fontSize={24} mb={8} fontWeight={500}>
+        {descriptionText}
+      </Text>
       <List spacing={4}>
         {jokes.map(({ id, value }, idx) => {
           const lastIdx = jokes.length - 1;
