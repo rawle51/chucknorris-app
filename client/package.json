@@ -29,7 +29,7 @@
     "prettier:write": "npx prettier --write .",
     "unused-exports": "ts-prune",
     "type-check": "tsc --noEmit --noUnusedLocals --noUnusedParameters",
-    "type-coverage": "type-coverage --strict --at-least 97",
+    "type-coverage": "type-coverage --strict --at-least 99 --ignore-files '**/*.test.tsx'",
     "depcheck": "depcheck",
     "spell": "cspell --no-progress 'src/**/*'",
     "static-checks": "bin/checkstatic"
