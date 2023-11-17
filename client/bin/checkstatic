@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+npm run unused-exports &&
+npm run type-coverage &&
+npm run type-check &&
+npm run lint &&
+npm run prettier &&
+npm run depcheck &&
+npm run spell
+
+echo -e "\n🍏 All checks passed"
