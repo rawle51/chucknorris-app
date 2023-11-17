@@ -1,0 +1,7 @@
+{
+  "version": "0.1",
+  "language": ["en"],
+  "dictionaries": ["css", "html", "typescript"],
+  "allowCompoundWords": true,
+  "words": ["testid"]
+}
