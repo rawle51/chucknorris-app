@@ -49,7 +49,5 @@ describe('HomePage component', () => {
         JSON.stringify([mockJoke]),
       );
     });
-
-    // Add expectations for toast messages or any other assertions based on success criteria.
   });
 });
