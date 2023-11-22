@@ -11,7 +11,7 @@ export const App = () => (
     <Flex flexDirection="column" alignItems="center">
       <Center mb="8">
         <Heading as="h1" size="xl" padding={4} display="flex" gap={4}>
-          Jokes App
+          Jokes App test
         </Heading>
       </Center>
 
